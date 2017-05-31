@@ -1,0 +1,30 @@
+{
+  "name": "koa-restify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "busboy": "^0.2.14",
+    "koa": "^2.2.0",
+    "mysql": "^2.13.0",
+    "sequelize": "^3.30.4"
+  },
+  "devDependencies": {
+    "bcrypt": "^1.0.2",
+    "koa": "^2.2.0",
+    "redis": "^2.7.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hairichuhe/koa-restify.git"
+  },
+  "author": "xiaojunwang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hairichuhe/koa-restify/issues"
+  },
+  "homepage": "https://github.com/hairichuhe/koa-restify#readme"
+}
