@@ -13,7 +13,7 @@ import routes from './routes'
 import Mock from './mock'
 Mock.bootstrap();
 import 'font-awesome/css/font-awesome.min.css'
-import vueAjax from 'vue-ajax'
+import vueAjax from '../utils/vueAjax'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
