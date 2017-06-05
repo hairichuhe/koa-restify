@@ -76,9 +76,9 @@ function json2url(json) {
                         if (oAjax.status == 400 || oAjax.status == 403) {
                             _this.$alert('权限错误，请重新登录！', '操作提示', {
                                 confirmButtonText: '确定',
-                                callback: action => {
-                                    // sessionStorage.removeItem('access_token');
-                                    // _this.$router.push('/login');
+                                callback: function(action) {
+                                    sessionStorage.removeItem('access_token');
+                                    _this.$router.push('/login');
                                 }
                             });
                         } else {
