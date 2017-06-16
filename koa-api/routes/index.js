@@ -1,4 +1,4 @@
-const Router=require("koa-router");
+const Router = require("koa-router");
 let home = new Router()
 module.exports = home;
 

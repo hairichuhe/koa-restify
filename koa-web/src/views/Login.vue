@@ -1,8 +1,8 @@
 <template>
   <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
     <h3 class="title">系统登录</h3>
-    <el-form-item prop="name">
-      <el-input type="text" v-model="ruleForm2.name" auto-complete="off" placeholder="账号"></el-input>
+    <el-form-item prop="username">
+      <el-input type="text" v-model="ruleForm2.username" auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
     <el-form-item prop="password">
       <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="密码"></el-input>
@@ -23,11 +23,11 @@
       return {
         logining: false,
         ruleForm2: {
-          name: '',
+          username: '',
           password: ''
         },
         rules2: {
-          name: [
+          username: [
             { required: true, message: '请输入账号', trigger: 'blur' },
             //{ validator: validaePass }
           ],
@@ -48,17 +48,18 @@
         this.$refs.ruleForm2.validate((valid)=>{
           if(valid){
             _this.$ajax({
-              type:"GET",
+              type:"POST",
               url:_this.$root.loginHost+"/oauth/token",
+              data:_this.ruleForm2,
               success:function(res){
-                alert(res.data);
+                sessionStorage.access_token=res.data.access_token;
+                _this.$router.push({ path: '/table' });
               },
               error:function(res){
-                alert(JSON.stringify(res))
+                _this.$message.error(res.meta.message);
               }
             })
           }else{
-            console.log("error submit!!");
             return false;
           }
         })
@@ -71,7 +72,7 @@
             //_this.$router.replace('/table');
             this.logining = true;
             //NProgress.start();
-            var loginParams = { username: this.ruleForm2.name, password: this.ruleForm2.password };
+            var loginParams = { username: this.ruleForm2.username, password: this.ruleForm2.password };
             requestLogin(loginParams).then(data => {
               this.logining = false;
               //NProgress.done();

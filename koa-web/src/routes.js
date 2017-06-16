@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Main from './views/Main.vue'
 import Table from './views/nav1/Table.vue'
 import Form from './views/nav1/Form.vue'
+import Adduser from './views/nav1/Adduser.vue'
 import user from './views/nav1/user.vue'
 import Page4 from './views/nav2/Page4.vue'
 import Page5 from './views/nav2/Page5.vue'
@@ -33,6 +34,7 @@ let routes = [
             { path: '/main', component: Main, name: '主页', hidden: true },
             { path: '/table', component: Table, name: 'Table' },
             { path: '/form', component: Form, name: 'Form' },
+            { path: '/addUser', component: Adduser, name: '添加用户' },
             { path: '/user', component: user, name: '列表' },
         ]
     },

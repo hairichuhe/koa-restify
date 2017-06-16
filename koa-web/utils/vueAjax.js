@@ -37,17 +37,25 @@ function json2url(json) {
                         str = '?' + json2url(json.data)
                     }
                     oAjax.open('GET', json.url + str, true);
+
+                    if (sessionStorage.access_token) {
+                        oAjax.setRequestHeader('Authorization', sessionStorage.access_token);
+                    };
                     oAjax.send();
                     break;
                 case 'post':
                     oAjax.open('POST', json.url, true);
+
+                    if (sessionStorage.access_token) {
+                        oAjax.setRequestHeader('Authorization', sessionStorage.access_token);
+                    };
                     oAjax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                     oAjax.send(json2url(json.data));
                     break;
             }
 
             // fnLoading()
-            json.fnLoading && json.fnLoading();
+            // json.fnLoading && json.fnLoading();
 
             oAjax.onreadystatechange = function() {
                 if (oAjax.readyState == 4) {
@@ -74,7 +82,7 @@ function json2url(json) {
                         }
                     } else {
                         if (oAjax.status == 400 || oAjax.status == 403) {
-                            _this.$alert('权限错误，请重新登录！', '操作提示', {
+                            _this.$alert(JSON.parse(oAjax.responseText).meta.message, '操作提示', {
                                 confirmButtonText: '确定',
                                 callback: function(action) {
                                     sessionStorage.removeItem('access_token');
@@ -82,12 +90,12 @@ function json2url(json) {
                                 }
                             });
                         } else {
-                        	var res=JSON.parse(oAjax.responseText)
-                        	if(json.error){
-                            	json.error(res);
-                        	}else{
-                        		_this.$message.error(res.meta.message);
-                        	}
+                            var res = JSON.parse(oAjax.responseText)
+                            if (json.error) {
+                                json.error(res);
+                            } else {
+                                _this.$message.error(res.meta.message);
+                            }
                         }
                     }
                 }

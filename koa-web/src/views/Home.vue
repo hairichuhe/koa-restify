@@ -107,15 +107,23 @@
 			logout: function () {
 				var _this = this;
 				this.$confirm('确认退出吗?', '提示', {
-					//type: 'warning'
+					type: 'warning'
 				}).then(() => {
-					sessionStorage.removeItem('user');
-					_this.$router.push('/login');
-				}).catch(() => {
-
+		            _this.$ajax({
+		              	type:"POST",
+		              	url:_this.$root.host+"/user/revoke",
+		              	success:function(res){
+		                	sessionStorage.removeItem('access_token');
+							_this.$router.push('/login');
+		              	},
+		              	error:function(res){
+		                	_this.$message.error(res.meta.message);
+		              	}
+		            })
+				}).catch((err) => {
+					console.log(err)
+					// console.log("已取消！")
 				});
-
-
 			},
 			//折叠导航栏
 			collapse:function(){
@@ -126,12 +134,12 @@
 			}
 		},
 		mounted() {
-			var user = sessionStorage.getItem('user');
-			if (user) {
-				user = JSON.parse(user);
-				this.sysUserName = user.name || '';
-				this.sysUserAvatar = user.avatar || '';
-			}
+			// var user = sessionStorage.getItem('user');
+			// if (user) {
+			// 	user = JSON.parse(user);
+			// 	this.sysUserName = user.name || '';
+			// 	this.sysUserAvatar = user.avatar || '';
+			// }
 
 		}
 	}

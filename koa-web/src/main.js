@@ -14,6 +14,7 @@ import Mock from './mock'
 Mock.bootstrap();
 import 'font-awesome/css/font-awesome.min.css'
 import vueAjax from '../utils/vueAjax'
+import VueCoreImageUpload  from 'vue-core-image-upload';
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
@@ -29,10 +30,10 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     //NProgress.start();
     if (to.path == '/login') {
-        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('access_token');
     }
-    let user = JSON.parse(sessionStorage.getItem('user'));
-    if (!user && to.path != '/login') {
+    let token = sessionStorage.getItem('access_token');
+    if (!token && to.path != '/login') {
         next({ path: '/login' })
     } else {
         next()
@@ -49,6 +50,9 @@ new Vue({
     data: {
         host:process.env.API_ROOT,
         loginHost:process.env.LOGIN_ROOT
+    },
+    components: {
+        'vue-core-image-upload': VueCoreImageUpload
     },
     router,
     store,
