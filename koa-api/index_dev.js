@@ -1,18 +1,16 @@
 const koa = require("koa")
 const Router = require("koa-router")
 const routes = require("./routes")
-const aes = require("./utils/aes/aes");
-const str = require("./utils/str")
 const app = new koa();
-const rds = require("./utils/redipool/redipool")
 const bodyParser = require('koa-bodyparser');
+
 
 app.use(async(ctx, next) => {
     ctx.set("Access-Control-Allow-Origin", "*")
     ctx.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
     ctx.set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
     if(ctx.method=="OPTIONS"){
-        ctx.body=true;
+        ctx.body="";
     }else{
         await next();  
     }
@@ -49,21 +47,6 @@ app.use(async(ctx, next) => {
             },
             data: null
         }
-    }
-});
-
-// 权限验证中间件
-app.use(async(ctx, next) => {
-    if (ctx.header.authorization) {
-        let key = "token_" + str.substr(JSON.stringify(aes.decrypt(ctx.header.authorization)), "id:", ",ip:");
-        let token = await rds.get(key);
-        if (token == ctx.header.authorization) {
-            await next()
-        } else {
-            ctx.throw(403, "您无权访问，请登录！")
-        }
-    } else {
-        ctx.throw(403, "您无权访问，请登录！")
     }
 });
 app.use(bodyParser());

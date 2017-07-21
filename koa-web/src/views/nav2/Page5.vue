@@ -2,9 +2,10 @@
 <div class="center">
   <vue-core-image-upload
     class="btn btn-primary"
-    :crop="false"
+    crop="local"
+    crop-ratio="1:1"
+    extensions="png,jpeg,jpg"
     @imageuploaded="imageuploaded"
-    :data="data"
     :max-file-size="5242880"
     url="http://101.198.151.190/api/upload.php" >
   </vue-core-image-upload>

@@ -59,14 +59,12 @@ aes.decrypt = function (data) {
  * @param data 待加密内容
  * @returns {string}
  */
+
 aes.hashsalt = async (data)=> {
-    var result;
-    await bcrypt.hash(data, 10, function(err, hash) {
-        if (err){
-            throw new Error("获取hash出错！");
-        }
-        console.log(hash)
-        result= hash
+    return new Promise(function (resolve, reject) {
+        bcrypt.hash(data, 10, function(err, hash) {
+            if (err) reject(err);
+            resolve(hash);
+        });
     });
-    return result
 }

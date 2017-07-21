@@ -14,12 +14,14 @@ import Mock from './mock'
 Mock.bootstrap();
 import 'font-awesome/css/font-awesome.min.css'
 import vueAjax from '../utils/vueAjax'
-import VueCoreImageUpload  from 'vue-core-image-upload';
+import utils from '../utils/utils'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(vueAjax)
+
+Vue.use(utils)
 
 //NProgress.configure({ showSpinner: false });
 
@@ -50,9 +52,6 @@ new Vue({
     data: {
         host:process.env.API_ROOT,
         loginHost:process.env.LOGIN_ROOT
-    },
-    components: {
-        'vue-core-image-upload': VueCoreImageUpload
     },
     router,
     store,

@@ -1,4 +1,5 @@
 const Router=require("koa-router");
+const db = require("../../models");
 let privilege = new Router();
 
 module.exports = privilege;

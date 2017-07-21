@@ -65,7 +65,6 @@
         })
       },
       handleSubmit2(ev) {
-        alert(this.$root.host)
         var _this = this;
         this.$refs.ruleForm2.validate((valid) => {
           if (valid) {

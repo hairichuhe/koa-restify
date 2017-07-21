@@ -34,7 +34,7 @@ let routes = [
             { path: '/main', component: Main, name: '主页', hidden: true },
             { path: '/table', component: Table, name: 'Table' },
             { path: '/form', component: Form, name: 'Form' },
-            { path: '/addUser', component: Adduser, name: '添加用户' },
+            { path: '/addUser/:id', component: Adduser, name: '添加用户',hidden: true },
             { path: '/user', component: user, name: '列表' },
         ]
     },
