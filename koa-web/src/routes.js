@@ -1,4 +1,5 @@
 import Login from './views/Login.vue'
+import show from './views/show.vue'
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
 import Main from './views/Main.vue'
@@ -24,7 +25,7 @@ let routes = [
         name: '',
         hidden: true
     },
-    //{ path: '/main', component: Main },
+    { path: '/show', component: show,name: '',hidden: true },
     {
         path: '/',
         component: Home,

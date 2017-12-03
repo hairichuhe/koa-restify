@@ -53,7 +53,7 @@
               data:_this.ruleForm2,
               success:function(res){
                 sessionStorage.access_token=res.data.access_token;
-                _this.$router.push({ path: '/table' });
+                _this.$router.push({ path: '/show' });
               },
               error:function(res){
                 _this.$message.error(res.meta.message);

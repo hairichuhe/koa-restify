@@ -2,7 +2,8 @@
 	<el-row class="container">
 		<el-col :span="24" class="header">
 			<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
-				{{collapsed?'':sysName}}
+				<template v-if="!collapsed">{{sysName}}</template>
+				<template v-else><img src="../assets/logo.png" /></template>
 			</el-col>
 			<el-col :span="10">
 				<div class="tools" @click.prevent="collapse">
@@ -75,7 +76,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'VUEADMIN',
+				sysName:'医废中心管理系统',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',
@@ -187,7 +188,7 @@
 				img {
 					width: 40px;
 					float: left;
-					margin: 10px 10px 10px 18px;
+					margin: 10px -10px 10px;
 				}
 				.txt {
 					color:#fff;
